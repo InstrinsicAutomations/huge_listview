@@ -197,6 +197,9 @@ class HugeListViewState<T> extends State<HugeListView<T>> {
 
   @override
   Widget build(BuildContext context) {
+    final int totalItemCount =
+        widget.listViewController?.totalItemCount ?? this.totalItemCount;
+
     if (error != null && widget.errorBuilder != null)
       return widget.errorBuilder!(context, error);
     if (totalItemCount == -1 && widget.waitBuilder != null)
@@ -330,8 +333,7 @@ class HugeListViewState<T> extends State<HugeListView<T>> {
 class _MaxVelocityPhysics extends AlwaysScrollableScrollPhysics {
   final double velocityThreshold;
 
-  const _MaxVelocityPhysics(
-      {required this.velocityThreshold, super.parent});
+  const _MaxVelocityPhysics({required this.velocityThreshold, super.parent});
 
   @override
   bool recommendDeferredLoading(
